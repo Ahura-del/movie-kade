@@ -17,6 +17,7 @@ const getLandImage = async ({ movie_id }: { movie_id: string }) => {
     const response = await request.json();
     return response.backdrops[0];
   } catch (error) {
+    console.log(error)
     return new Response("Error fetching data", { status: 500 });
   }
 };

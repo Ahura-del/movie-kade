@@ -1,9 +1,6 @@
 import { NewMovie } from "@/Types/NewMovie";
 const Heading = dynamic(()=>import("./components/Heading"))
-import Navbar from "./components/Navbar";
 import dynamic from "next/dynamic";
-import MovieCard from "./components/MovieCard";
-import Link from "next/link";
 import LandingPageSections from "./components/LandingPageSections";
 
 const getNewMovie = async()=>{
@@ -18,6 +15,7 @@ const getNewMovie = async()=>{
     const response = await request.json();
     return response.results.slice(0,4); 
   } catch (error) {
+    console.log(error)
     return new Response("Failed to fetch data", { status: 500 });
   }
 }
@@ -34,6 +32,7 @@ const getNewSeries = async()=>{
     const response = await request.json();
     return response.results.slice(0, 4);
   } catch (error) {
+    console.log(error)
     return new Response("Failed to fetch data", { status: 500 });
   }
 }
@@ -50,6 +49,7 @@ const getTrending = async()=>{
     const response = await request.json();
     return response.results.slice(0, 4);
   } catch (error) {
+    console.log(error)
     return new Response("Failed to fetch data", { status: 500 });
   }
 }
@@ -60,19 +60,17 @@ const Home = async () => {
   const newSeries = await getNewSeries();
   const trending = await getTrending();
   const movie = newMovie[0];
-  console.log(newSeries)
+ 
   return (
-    <div  className="bg-[#070707] size-full  dark:bg-white ">
-      <Navbar />
+    <div  className="bg-[#070707] size-full  dark:bg-[#eee] ">
       <Heading  movieDetail={movie}/>
       <div className="space-y-5">
       {/* new movies */}
-      <LandingPageSections movie={newMovie} sectionName="New Movies" />
+      <LandingPageSections movie={newMovie} sectionName="New Movies"  seeAllLink="/tv/on_the_air?language=en-US&page=1" />
       {/* new series */}
-      <LandingPageSections movie={newSeries} sectionName="New Series" />
+      <LandingPageSections movie={newSeries} sectionName="New Series" seeAllLink='/tv/on_the_air?language=en-US&page=1' />
       {/* trending */}
-      <LandingPageSections movie={trending} sectionName="Trending" />
-
+      <LandingPageSections movie={trending} sectionName="Trending" seeAllLink='/trending/all/day?language=en-US' />
       </div>
 
     </div>
