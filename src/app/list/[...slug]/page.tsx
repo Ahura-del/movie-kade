@@ -1,4 +1,4 @@
-import React, { cache } from "react";
+import React from "react";
 import { NewMovie } from "@/Types/NewMovie";
 import dynamic from "next/dynamic";
 const List = dynamic(() => import("../List"),{ssr: true})
@@ -17,16 +17,16 @@ const getMovies = async ({ link }: { link: string }) => {
     return response.results;
   } catch (error) {
     console.log(error)
-    return new Response("Failed to fetch data", { status: 500 });
+    return [];
   }
 };
 
-const Lists = async ({ params }: { params: Promise<{ link: string }> }) => {
-  const { link } = await params;
-  const movies: NewMovie[] = await getMovies({link:decodeURIComponent(link)});
+const Lists = async ({ params }: { params: Promise<{ slug:string[]}> }) => {
+  const {slug} = await params
+  const movies: NewMovie[] = await getMovies({link:decodeURIComponent(slug[0])});
   return (
     <div className="bg-[#070707] size-full  dark:bg-[#eee] ">
-      <List movies={movies} /> 
+      <List movies={movies} mediaType={slug[1]} /> 
     </div>
   );
 };

@@ -11,6 +11,7 @@ export interface NewMovie {
     release_date:      Date;
     title:             string;
     name:              string;  
+    media_type:        string;
     video:             boolean;
     vote_average:      number;
 }

@@ -66,11 +66,11 @@ const Home = async () => {
       <Heading  movieDetail={movie}/>
       <div className="space-y-5">
       {/* new movies */}
-      <LandingPageSections movie={newMovie} sectionName="New Movies"  seeAllLink="/tv/on_the_air?language=en-US&page=1" />
+      <LandingPageSections movie={newMovie} sectionName="New Movies"  seeAllLink="/tv/on_the_air?language=en-US&page=1" mediaType='movie' />
       {/* new series */}
-      <LandingPageSections movie={newSeries} sectionName="New Series" seeAllLink='/tv/on_the_air?language=en-US&page=1' />
+      <LandingPageSections movie={newSeries} sectionName="New Series" seeAllLink='/tv/on_the_air?language=en-US&page=1' mediaType='tv' />
       {/* trending */}
-      <LandingPageSections movie={trending} sectionName="Trending" seeAllLink='/trending/all/day?language=en-US' />
+      <LandingPageSections movie={trending} sectionName="Trending" seeAllLink='/trending/all/day?language=en-US' mediaType="trending" />
       </div>
 
     </div>

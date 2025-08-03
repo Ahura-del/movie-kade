@@ -1,18 +1,22 @@
 import { NewMovie } from "@/Types/NewMovie";
 import { Play, Star } from "./Icons";
 import Button from "./Button";
+import Link from "next/link";
 
 
 
 const MovieCard = async ({
   movie,
+  mediaType
 }: {
   movie: NewMovie;
+  mediaType:string
 }) => {
 
 
   return (
-    <div
+    <Link
+    href={`/detail/${movie.id}/${movie.media_type ? movie.media_type : mediaType}`}
       style={{
         backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
       }}
@@ -34,7 +38,7 @@ const MovieCard = async ({
           </Button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
